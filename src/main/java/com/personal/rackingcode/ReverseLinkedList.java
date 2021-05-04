@@ -16,7 +16,7 @@ public class ReverseLinkedList {
         reverse(array);
         printArray(array);
 
-        int n = 205;
+        int n = 48;
         int[] memo = new int[n + 1];
         System.out.println(fibo(n, memo));
         System.out.println(fiboDummy(n));
@@ -32,6 +32,7 @@ public class ReverseLinkedList {
     }
 
     static int fiboDummy(int n) {
+        if (n > 50) throw new RuntimeException("Is not feasible to compute Fibonacci sequence for " + n);
         if (n == 0) return 0;
         else if (n == 1) return 1;
 
