@@ -1,5 +1,8 @@
 package com.personal.rackingcode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Arrays {
 
     public static void main(String[] args) {
@@ -11,6 +14,15 @@ public class Arrays {
         System.out.println("isPermutation(\"rafael\") = " + isPermutation("rafael", "arafle"));
 
         urlIfy("Mr John Smith    ".toCharArray(), 13);
+
+        System.out.println("isPalindrome(\"arara\") = " + isPalindrome("arara"));
+        System.out.println("isPalindrome(\"\") = " + isPalindrome(""));
+        System.out.println("isPalindrome(\"araraa\") = " + isPalindrome("araraa"));
+        System.out.println("isPalindrome(\"ovo\") = " + isPalindrome("ovo"));
+        System.out.println("isPalindrome(\"car\") = " + isPalindrome("car"));
+        System.out.println("isPalindrome(\"reter\") = " + isPalindrome("reter"));
+        System.out.println("isPalindrome(\"tact coa\") = " + isPalindrome("tact coa"));
+        System.out.println("isPalindrome(\"aNa   \") = " + isPalindrome("aNa   "));
     }
 
     //"Mr John Smith    "
@@ -37,6 +49,30 @@ public class Arrays {
         }
 
         System.out.println("");
+    }
+
+    // ARARA - OVO - reter - tact coa
+    static boolean isPalindrome(String str) {
+        Map<Character, Integer> hash = new HashMap<>();
+
+        String clearStr = str.toLowerCase().replace(" ", "");
+
+        //O(n) where n is the size of input string
+        for (char s : clearStr.toCharArray()) {
+            if (hash.containsKey(s)) {
+                var v = hash.get(s);
+                v++;
+                hash.put(s, v);
+            } else {
+                hash.put(s, 1);
+            }
+        }
+
+        //O(letters) number of different letter from input string
+        return hash.values()
+                .stream()
+                .filter(v -> v % 2 != 0)
+                .count() == 1;
     }
 
     static boolean isPermutation(String str1, String str2) {
