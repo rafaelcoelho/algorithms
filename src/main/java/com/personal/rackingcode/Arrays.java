@@ -9,8 +9,35 @@ public class Arrays {
         System.out.println("isUnique(str) = " + isUniqueNoAdditionalDS(str));
 
         System.out.println("isPermutation(\"rafael\") = " + isPermutation("rafael", "arafle"));
+
+        urlIfy("Mr John Smith    ".toCharArray(), 13);
     }
 
+    //"Mr John Smith    "
+    //"Mr%20John%20Smith "
+    static void urlIfy(char[] str, int realSize) {
+        int cur = realSize - 1;
+        int index = str.length - 1;
+
+        System.out.print("\nThe string " + new String(str) + " urlfy is ");
+
+        while (index >= 0) {
+            if (str[cur] ==  ' ') {
+                str[index--] = '0';
+                str[index--] = '2';
+                str[index--] = '%';
+                cur--;
+            } else {
+                str[index--] = str[cur--];
+            }
+        }
+
+        for (char s : str) {
+            System.out.print(s);
+        }
+
+        System.out.println("");
+    }
 
     static boolean isPermutation(String str1, String str2) {
         if (str1.length() != str2.length()) return false;
