@@ -41,7 +41,11 @@ public class Arrays {
         stringCompression("aabbcdfgghhkuitrAaAAaaaaaaaaaaaaaaaaaa");
         stringCompression("");
 
-        int maxDif = 1;
+        compressionWithOneLetter("aaaabcccddef");
+        compressionWithOneLetter("a");
+        compressionWithOneLetter("aabbcdfgghhkuitrAaAAaaaaaaaaaaaaaaaaaa");
+        compressionWithOneLetter("qwertyuioasdfghjkl");
+        compressionWithOneLetter("");
 
         char[] bases = base.toCharArray();
         char[] deltas = delta.toCharArray();
