@@ -23,6 +23,41 @@ public class Arrays {
         System.out.println("isPalindrome(\"reter\") = " + isPalindrome("reter"));
         System.out.println("isPalindrome(\"tact coa\") = " + isPalindrome("tact coa"));
         System.out.println("isPalindrome(\"aNa   \") = " + isPalindrome("aNa   "));
+
+        System.out.println("isOneStringEdit(\"pale\", \"ple\") = " + isOneStringEdit("pale", "ple"));
+        System.out.println("isOneStringEdit(\"pale\", \"bake\") = " + isOneStringEdit("pale", "bake"));
+        System.out.println("isOneStringEdit(\"pales\", \"pale\") = " + isOneStringEdit("pales", "pale"));
+        System.out.println("isOneStringEdit(\"pale\", \"pale\") = " + isOneStringEdit("pale", "pale"));
+        System.out.println("isOneStringEdit(\"pale\", \"bale\") = " + isOneStringEdit("pale", "bale"));
+        System.out.println("isOneStringEdit(\"pae\", \"pale\") = " + isOneStringEdit("pae", "pale"));
+    }
+
+    //O(size of delta string)
+    static boolean isOneStringEdit(String base, String delta) {
+        int lengthDif = Math.abs(base.length() - delta.length());
+
+        if (lengthDif > 1) return false;
+
+        int maxDif = 1;
+
+        char[] bases = base.toCharArray();
+        char[] deltas = delta.toCharArray();
+
+        int i = 0, j = 0;
+        while (i < deltas.length && j < bases.length && maxDif != -1) {
+            if (deltas[i] != bases[j]) {
+                maxDif--;
+                j++;
+
+                if (lengthDif == 0) i++;
+                continue;
+            }
+
+            i++;
+            j++;
+        }
+
+        return maxDif != -1;
     }
 
     //"Mr John Smith    "
@@ -48,7 +83,7 @@ public class Arrays {
             System.out.print(s);
         }
 
-        System.out.println("");
+        System.out.println();
     }
 
     // ARARA - OVO - reter - tact coa
