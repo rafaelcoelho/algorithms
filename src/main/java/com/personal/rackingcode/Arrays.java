@@ -42,6 +42,33 @@ public class Arrays {
         compressionWithOneLetter("qwertyuioasdfghjkl");
         compressionWithOneLetter("");
 
+        int[][] matrix = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}};
+        printMatrix(matrix);
+        int[][] rotateMatrix = rotateMatrix(matrix);
+        printMatrix(rotateMatrix);
+    }
+
+    static void printMatrix(int[][] matrix) {
+        System.out.println("\nMatrix is:");
+        for (int[] ints : matrix) {
+            for (int anInt : ints) {
+                System.out.print("\t" + anInt + "\t");
+            }
+
+            System.out.println();
+        }
+    }
+
+    static int[][] rotateMatrix(int[][] matrix) {
+        int[][] rt = new int[matrix.length][matrix[0].length];
+
+        for (int row = 0; row < matrix.length; row++) {
+            for (int col = 0; col < matrix.length; col++) {
+                rt[col][rt.length -1 - row] = matrix[row][col];
+            }
+        }
+
+        return rt;
     }
 
     static String compressionWithOneLetter(String input) {
