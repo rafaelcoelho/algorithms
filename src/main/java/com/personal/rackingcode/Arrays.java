@@ -36,6 +36,102 @@ public class Arrays {
     static boolean isOneStringEdit(String base, String delta) {
         int lengthDif = Math.abs(base.length() - delta.length());
 
+        stringCompression("aaaabcccddef");
+        stringCompression("a");
+        stringCompression("aabbcdfgghhkuitrAaAAaaaaaaaaaaaaaaaaaa");
+        stringCompression("");
+
+        int maxDif = 1;
+
+        char[] bases = base.toCharArray();
+        char[] deltas = delta.toCharArray();
+
+        int i = 0, j = 0;
+        while (i < deltas.length && j < bases.length && maxDif != -1) {
+            if (deltas[i] != bases[j]) {
+                maxDif--;
+                j++;
+
+                if (lengthDif == 0) i++;
+                continue;
+            }
+
+            i++;
+            j++;
+        }
+
+        return maxDif != -1;
+    }
+
+    static String compressionWithOneLetter(String input) {
+        System.out.print("2 - Compress from " + input);
+
+        if (input.isEmpty()) return input;
+
+        int count = 0;
+        StringBuilder buffer = new StringBuilder();
+
+        for (int i = 0; i < input.length(); i++) {
+            count++;
+
+            if (i + 1 >= input.length() || input.charAt(i) != input.charAt(i + 1)) {
+                buffer.append(input.charAt(i));
+                buffer.append(count);
+                count = 0;
+            }
+        }
+
+        String result = buffer.length() < input.length() ? buffer.toString() : input;
+        System.out.println(" to " + result);
+
+        return result;
+
+    }
+
+    //aaaabcccdde - a4bc3d2e - O(size of input string)
+    static String stringCompression(String input) {
+        System.out.print("1 - Compress from " + input);
+
+        if (input.isEmpty()) return input;
+
+        StringBuilder result = new StringBuilder();
+
+        char[] chars = input.toCharArray();
+        int count = 1, p1 = 0, p2 = 1;
+
+        while (p2 < chars.length) {
+            if (chars[p1] != chars[p2] && count > 1) {
+                result.append(chars[p1]);
+                result.append(count);
+                count = 0;
+            } else if (chars[p1] != chars[p2] && count == 1) {
+                result.append(chars[p1]);
+                count = 0;
+            }
+
+            count++;
+            p1 = p2;
+            p2++;
+        }
+
+        result.append(chars[p1]);
+
+        if (count > 1) {
+            result.append(count);
+        }
+
+        if (result.length() == 0) return input;
+
+        String compressResult = result.length() < input.length() ? result.toString() : input;
+        System.out.println(" to " + compressResult);
+
+        return compressResult;
+    }
+
+    //O(size of delta string)
+    static boolean isOneStringEdit(String base, String delta) {
+        int lengthDif = Math.abs(base.length() - delta.length());
+
         if (lengthDif > 1) return false;
 
         int maxDif = 1;
