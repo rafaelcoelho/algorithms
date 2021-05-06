@@ -44,8 +44,19 @@ public class Arrays {
 
         int[][] matrix = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}};
         printMatrix(matrix);
-        int[][] rotateMatrix = rotateMatrix(matrix);
-        printMatrix(rotateMatrix);
+        rotateMatrixConstantSpaceComplexity(matrix);
+        printMatrix(matrix);
+
+        int[][] matrix2 = {{1,2,3},{5,6,7},{9,10,11}};
+        printMatrix(matrix2);
+        int[][] rotateMatrix2 = rotateMatrix(matrix2);
+        printMatrix(rotateMatrix2);
+
+        int[][] matrix3 = {{1,2,3},{5,6,7},{9,10,11}};
+        printMatrix(matrix3);
+        rotateMatrixConstantSpaceComplexity(matrix3);
+        printMatrix(matrix3);
+
     }
 
     static void printMatrix(int[][] matrix) {
@@ -56,6 +67,32 @@ public class Arrays {
             }
 
             System.out.println();
+        }
+    }
+
+    static void rotateMatrixConstantSpaceComplexity(int[][] matrix) {
+        int n = matrix.length;
+
+        for (int row = 0; row < n/2; row++) {
+            int last = n - 1 - row;
+
+            for (int collumn = row; collumn < last; collumn++) {
+                int offset = collumn - row;
+
+                int top = matrix[row][collumn];
+
+                //left -> top
+                matrix[row][collumn] = matrix[last - offset][row];
+
+                //bottom -> left
+                matrix[last - offset][row] = matrix[last][last - offset];
+
+                //right -> bottom
+                matrix[last][last - offset] = matrix[collumn][last];
+
+                //top -> right
+                matrix[collumn][last] = top;
+            }
         }
     }
 
