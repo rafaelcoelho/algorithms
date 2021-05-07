@@ -1,9 +1,6 @@
 package com.personal.rackingcode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Arrays {
 
@@ -68,6 +65,19 @@ public class Arrays {
         array2Dimension.add(List.of(0,0,1,2,4,0));
 
         System.out.println("hourglassSum(array2Dimension) = " + hourglassSum(array2Dimension));
+
+        System.out.println("arrayLeftRotation(List.of(1,2,3,4,5,6), 5) = " + arrayLeftRotation(List.of(1, 2, 3, 4, 5, 6), 3));
+    }
+
+    public static List<Integer> arrayLeftRotation(List<Integer> a, int d) {
+        LinkedList<Integer> result = new LinkedList<>(a);
+
+        for (int i = 0; i < d; i++) {
+            int v = result.remove();
+            result.addLast(v);
+        }
+
+        return result;
     }
 
     /*
@@ -95,6 +105,7 @@ public class Arrays {
 
         return sum;
     }
+
 
     static void printMatrix(int[][] matrix) {
         System.out.println("\nMatrix is:");
