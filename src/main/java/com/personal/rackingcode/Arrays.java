@@ -70,7 +70,7 @@ public class Arrays {
     }
 
     public static List<Integer> arrayLeftRotation(List<Integer> a, int d) {
-        LinkedList<Integer> result = new LinkedList<>(a);
+        java.util.LinkedList<Integer> result = new java.util.LinkedList<>(a);
 
         for (int i = 0; i < d; i++) {
             int v = result.remove();
