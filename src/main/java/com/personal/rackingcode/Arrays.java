@@ -1,6 +1,8 @@
 package com.personal.rackingcode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Arrays {
@@ -57,6 +59,41 @@ public class Arrays {
         rotateMatrixConstantSpaceComplexity(matrix3);
         printMatrix(matrix3);
 
+        List<List<Integer>> array2Dimension = new ArrayList<>();
+        array2Dimension.add(List.of(1,1,1,0,0,0));
+        array2Dimension.add(List.of(0,1,0,0,0,0));
+        array2Dimension.add(List.of(1,1,1,0,0,0));
+        array2Dimension.add(List.of(0,0,2,4,4,0));
+        array2Dimension.add(List.of(0,0,0,2,0,0));
+        array2Dimension.add(List.of(0,0,1,2,4,0));
+
+        System.out.println("hourglassSum(array2Dimension) = " + hourglassSum(array2Dimension));
+    }
+
+    /*
+    *   1 1 1 0 0 0
+    *   0 1 0 0 0 0
+    *   1 1 1 0 0 0
+    *   0 0 2 4 4 0
+    *   0 0 0 2 0 0
+    *   0 0 1 2 4 0
+    *
+    *  Time complexity O(n/2 * m/2) - Space complexity of O(1)
+    * */
+    static int hourglassSum(List<List<Integer>> arr) {
+        int sum = Integer.MIN_VALUE;
+
+        for (int row = 0; row <= arr.size() / 2; row++) {
+            for (int column = 0; column <= arr.get(row).size() / 2; column++) {
+                int top = arr.get(row).get(column) + arr.get(row).get(column + 1) + arr.get(row).get(column + 2);
+                int mid = arr.get(row + 1).get(column + 1);
+                int bottom = arr.get(row + 2).get(column) + arr.get(row + 2).get(column + 1) + arr.get(row + 2).get(column + 2);
+
+                if (sum < (top + mid + bottom)) sum = top + mid + bottom;
+            }
+        }
+
+        return sum;
     }
 
     static void printMatrix(int[][] matrix) {
