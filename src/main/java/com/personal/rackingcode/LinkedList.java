@@ -1,6 +1,5 @@
 package com.personal.rackingcode;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -9,8 +8,29 @@ public class LinkedList {
     public static void main(String[] args) {
         System.out.println("4,5,5,6,7,8,8,7,6,6 is " + removeDuplicated_constantSpaceComplexity(new java.util.LinkedList<>(java.util.Arrays.asList(4,5,5,6,7,8,8,7,6,6))));
         System.out.println("4,5,5,6,7,8,8,7,6,6 is " + removeDuplicated_hashTable(new java.util.LinkedList<>(java.util.Arrays.asList(4,5,5,6,7,8,8,7,6,6))));
+
+        Node<Integer> head = new Node<>(877777);
+        head.next(20)
+            .next(30)
+            .next(32)
+            .next(389)
+            .next(42);
+
+        printKthElementList(head, 6);
     }
 
+    //O(n) in the worst case of time complexity
+    //O(1) space complexity
+    static int printKthElementList(Node<Integer> head, int index) {
+        if (head == null) return 0;
+        
+        int pos = printKthElementList(head.next, index) + 1;
+        
+        if (pos == index) System.out.println("head.value = " + head.value);
+
+        return pos;
+    }
+    
     //O(n) of time complexity and O(n of different values) space complexity
     static List<Integer> removeDuplicated_hashTable(java.util.LinkedList<Integer> in) {
         HashSet<Integer> hash = new HashSet<>();
@@ -47,5 +67,19 @@ public class LinkedList {
         }
 
         return in;
+    }
+
+    static class Node<T> {
+        T value;
+        Node<T> next;
+
+        Node(T value) {
+            this.value = value;
+        }
+
+        Node<T> next(T value) {
+            this.next = new Node<>(value);
+            return this.next;
+        }
     }
 }
