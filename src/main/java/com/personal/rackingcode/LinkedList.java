@@ -28,4 +28,23 @@ public class LinkedList {
         return in;
     }
 
+    //O(n²) of time complexity and O(1) space complexity
+    static List<Integer> removeDuplicated_constantSpaceComplexity(List<Integer> in) {
+
+        int i = 0, j;
+
+        while (i < in.size()) {
+            j = i + 1;
+            while (j < in.size()) {
+                if (in.get(i).equals(in.get(j))) {
+                    in.remove(j);
+                    continue;
+                }
+                j++;
+            }
+            i++;
+        }
+
+        return in;
+    }
 }
