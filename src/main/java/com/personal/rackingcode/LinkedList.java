@@ -7,12 +7,12 @@ import java.util.List;
 public class LinkedList {
 
     public static void main(String[] args) {
-        System.out.println("4,5,5,6,7,8,8,7,6,6 is " + removeDuplicated_constantSpaceComplexity(new ArrayList<>(java.util.Arrays.asList(4,5,5,6,7,8,8,7,6,6))));
-        System.out.println("4,5,5,6,7,8,8,7,6,6 is " + removeDuplicated_hashTable(new ArrayList<>(java.util.Arrays.asList(4,5,5,6,7,8,8,7,6,6))));
+        System.out.println("4,5,5,6,7,8,8,7,6,6 is " + removeDuplicated_constantSpaceComplexity(new java.util.LinkedList<>(java.util.Arrays.asList(4,5,5,6,7,8,8,7,6,6))));
+        System.out.println("4,5,5,6,7,8,8,7,6,6 is " + removeDuplicated_hashTable(new java.util.LinkedList<>(java.util.Arrays.asList(4,5,5,6,7,8,8,7,6,6))));
     }
 
     //O(n) of time complexity and O(n of different values) space complexity
-    static List<Integer> removeDuplicated_hashTable(List<Integer> in) {
+    static List<Integer> removeDuplicated_hashTable(java.util.LinkedList<Integer> in) {
         HashSet<Integer> hash = new HashSet<>();
 
         int i = 0;
@@ -30,7 +30,7 @@ public class LinkedList {
     }
 
     //O(n²) of time complexity and O(1) space complexity
-    static List<Integer> removeDuplicated_constantSpaceComplexity(List<Integer> in) {
+    static List<Integer> removeDuplicated_constantSpaceComplexity(java.util.LinkedList<Integer> in) {
 
         int i = 0, j;
 
