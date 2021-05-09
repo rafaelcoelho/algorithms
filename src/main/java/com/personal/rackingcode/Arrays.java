@@ -68,7 +68,7 @@ public class Arrays {
 
         List<Integer> baseValues = List.of(1, 2, 3, 4, 5, 6);
         List<Integer> input = new ArrayList<>(baseValues);
-        int shiftOf = 1;
+        int shiftOf = 3;
         arrayLeftRotation(input, shiftOf);
         arrayLeftRotation_constantSpace(input, shiftOf);
     }
@@ -78,18 +78,14 @@ public class Arrays {
     //{1 - 2 - 3 - 4} -> {3 - 4 - 1 - 2}
     public static List<Integer> arrayLeftRotation_constantSpace(List<Integer> a, int d) {
         System.out.print("arrayLeftRotation_constantSpace of " + a);
-        int size = a.size() - 1;
 
-        while (d > 0){
-            int head = a.get(0);
-            for (int i = 0; i < size; i++) {
-                a.set(i, a.get(i + 1));
-            }
-            a.set(size, head);
+        while (d > 0) {
+            int head = a.remove(0);
+            a.add(head);
             d--;
         }
-
         System.out.print(" is " + a + "\n");
+
         return a;
     }
 
