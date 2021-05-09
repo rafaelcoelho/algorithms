@@ -66,10 +66,36 @@ public class Arrays {
 
         System.out.println("hourglassSum(array2Dimension) = " + hourglassSum(array2Dimension));
 
-        System.out.println("arrayLeftRotation(List.of(1,2,3,4,5,6), 5) = " + arrayLeftRotation(List.of(1, 2, 3, 4, 5, 6), 3));
+        List<Integer> baseValues = List.of(1, 2, 3, 4, 5, 6);
+        List<Integer> input = new ArrayList<>(baseValues);
+        int shiftOf = 1;
+        arrayLeftRotation(input, shiftOf);
+        arrayLeftRotation_constantSpace(input, shiftOf);
+    }
+
+    //4 2
+    //{1 - 2 - 3 - 4} -> {2 - 3 - 4 - 1}
+    //{1 - 2 - 3 - 4} -> {3 - 4 - 1 - 2}
+    public static List<Integer> arrayLeftRotation_constantSpace(List<Integer> a, int d) {
+        System.out.print("arrayLeftRotation_constantSpace of " + a);
+        int size = a.size() - 1;
+
+        while (d > 0){
+            int head = a.get(0);
+            for (int i = 0; i < size; i++) {
+                a.set(i, a.get(i + 1));
+            }
+            a.set(size, head);
+            d--;
+        }
+
+        System.out.print(" is " + a + "\n");
+        return a;
     }
 
     public static List<Integer> arrayLeftRotation(List<Integer> a, int d) {
+        System.out.print("arrayLeftRotation of " + a);
+
         java.util.LinkedList<Integer> result = new java.util.LinkedList<>(a);
 
         for (int i = 0; i < d; i++) {
@@ -77,6 +103,7 @@ public class Arrays {
             result.addLast(v);
         }
 
+        System.out.print(" is " + result + "\n");
         return result;
     }
 
