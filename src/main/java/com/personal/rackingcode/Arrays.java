@@ -1,6 +1,7 @@
 package com.personal.rackingcode;
 
 import java.util.*;
+import java.util.LinkedList;
 
 public class Arrays {
 
@@ -75,25 +76,59 @@ public class Arrays {
         zeroMatrix(new int[][]{{1,0,3,4},{1,2,3,4},{5,6,7,0}});
         zeroMatrix(new int[][]{{1,2,3,4},{1,2,3,4},{5,6,7,8}});
         zeroMatrix(new int[][]{{1,2,3,4},{1,2,0,4},{5,6,7,8}});
+
+        zeroMatrix_usingMarkupFlag(new int[][]{{1,0,3,4},{1,2,3,4},{5,6,7,0}});
+        zeroMatrix_usingMarkupFlag(new int[][]{{1,2,3,4},{1,2,3,4},{5,6,7,8}});
+        zeroMatrix_usingMarkupFlag(new int[][]{{1,2,3,4},{1,2,0,4},{5,6,7,8}});
     }
 
-    public static void zeroMatrix(int[][] matrix) {
+    //O(nm) for time complexity
+    //O(n of zeros) for space complexity
+    public static void zeroMatrix_usingMarkupFlag(int[][] matrix) {
         printMatrix(matrix);
 
-        for (int[] integers : matrix) {
-            for (int j = 0; j < integers.length; j++) {
-                if (integers[j] == 0) {
-                    aux_zeroRow(integers);
-                    aux_zeroColumn(matrix, j);
+        class Node{
+            final int row;
+            final int column;
+
+            Node(int row, int column) {
+                this.row = row;
+                this.column = column;
+            }
+        }
+
+        List<Node> zeros = new LinkedList<>();
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] == 0) {
+                    zeros.add(new Node(i, j));
                     break;
                 }
             }
         }
 
-        for (int[] integers : matrix) {
-            for (int j = 0; j < integers.length; j++) {
-                if (integers[j] == Integer.MIN_VALUE) {
-                    integers[j] = 0;
+        zeros.forEach(it -> aux_zeroMatrixAxis(matrix, it.row, it.column, 0));
+
+        printMatrix(matrix);
+    }
+
+    public static void zeroMatrix(int[][] matrix) {
+        printMatrix(matrix);
+
+        for (int row = 0; row < matrix.length; row++) {
+            for (int column = 0; column < matrix.length; column++) {
+                if (matrix[row][column] == 0) {
+                    aux_zeroMatrixAxis(matrix, row, column, Integer.MIN_VALUE);
+                    break;
+                }
+            }
+        }
+
+        for (int[] lines : matrix) {
+            for (int column = 0; column < lines.length; column++) {
+                if (lines[column] == Integer.MIN_VALUE) {
+                    lines[column] = 0;
                 }
             }
         }
@@ -101,14 +136,12 @@ public class Arrays {
         printMatrix(matrix);
     }
 
-    public static void aux_zeroRow(int[] row) {
-        java.util.Arrays.fill(row, Integer.MIN_VALUE);
-    }
-
-    public static void aux_zeroColumn(int[][] matrix, int column) {
+    public static void aux_zeroMatrixAxis(int[][] matrix, int row, int column, int value) {
         for (int i = 0; i < matrix.length; i++) {
-            matrix[i][column] = Integer.MIN_VALUE;
+            matrix[i][column] = value;
         }
+
+        java.util.Arrays.fill(matrix[row], value);
     }
 
     //4 2
