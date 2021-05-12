@@ -41,28 +41,28 @@ public class Arrays {
         compressionWithOneLetter("qwertyuioasdfghjkl");
         compressionWithOneLetter("");
 
-        int[][] matrix = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}};
+        int[][] matrix = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
         printMatrix(matrix);
         rotateMatrixConstantSpaceComplexity(matrix);
         printMatrix(matrix);
 
-        int[][] matrix2 = {{1,2,3},{5,6,7},{9,10,11}};
+        int[][] matrix2 = {{1, 2, 3}, {5, 6, 7}, {9, 10, 11}};
         printMatrix(matrix2);
         int[][] rotateMatrix2 = rotateMatrix(matrix2);
         printMatrix(rotateMatrix2);
 
-        int[][] matrix3 = {{1,2,3},{5,6,7},{9,10,11}};
+        int[][] matrix3 = {{1, 2, 3}, {5, 6, 7}, {9, 10, 11}};
         printMatrix(matrix3);
         rotateMatrixConstantSpaceComplexity(matrix3);
         printMatrix(matrix3);
 
         List<List<Integer>> array2Dimension = new ArrayList<>();
-        array2Dimension.add(List.of(1,1,1,0,0,0));
-        array2Dimension.add(List.of(0,1,0,0,0,0));
-        array2Dimension.add(List.of(1,1,1,0,0,0));
-        array2Dimension.add(List.of(0,0,2,4,4,0));
-        array2Dimension.add(List.of(0,0,0,2,0,0));
-        array2Dimension.add(List.of(0,0,1,2,4,0));
+        array2Dimension.add(List.of(1, 1, 1, 0, 0, 0));
+        array2Dimension.add(List.of(0, 1, 0, 0, 0, 0));
+        array2Dimension.add(List.of(1, 1, 1, 0, 0, 0));
+        array2Dimension.add(List.of(0, 0, 2, 4, 4, 0));
+        array2Dimension.add(List.of(0, 0, 0, 2, 0, 0));
+        array2Dimension.add(List.of(0, 0, 1, 2, 4, 0));
 
         System.out.println("hourglassSum(array2Dimension) = " + hourglassSum(array2Dimension));
 
@@ -71,6 +71,44 @@ public class Arrays {
         int shiftOf = 3;
         arrayLeftRotation(input, shiftOf);
         arrayLeftRotation_constantSpace(input, shiftOf);
+
+        zeroMatrix(new int[][]{{1,0,3,4},{1,2,3,4},{5,6,7,0}});
+        zeroMatrix(new int[][]{{1,2,3,4},{1,2,3,4},{5,6,7,8}});
+        zeroMatrix(new int[][]{{1,2,3,4},{1,2,0,4},{5,6,7,8}});
+    }
+
+    public static void zeroMatrix(int[][] matrix) {
+        printMatrix(matrix);
+
+        for (int[] integers : matrix) {
+            for (int j = 0; j < integers.length; j++) {
+                if (integers[j] == 0) {
+                    aux_zeroRow(integers);
+                    aux_zeroColumn(matrix, j);
+                    break;
+                }
+            }
+        }
+
+        for (int[] integers : matrix) {
+            for (int j = 0; j < integers.length; j++) {
+                if (integers[j] == Integer.MIN_VALUE) {
+                    integers[j] = 0;
+                }
+            }
+        }
+
+        printMatrix(matrix);
+    }
+
+    public static void aux_zeroRow(int[] row) {
+        java.util.Arrays.fill(row, Integer.MIN_VALUE);
+    }
+
+    public static void aux_zeroColumn(int[][] matrix, int column) {
+        for (int i = 0; i < matrix.length; i++) {
+            matrix[i][column] = Integer.MIN_VALUE;
+        }
     }
 
     //4 2
@@ -104,15 +142,15 @@ public class Arrays {
     }
 
     /*
-    *   1 1 1 0 0 0
-    *   0 1 0 0 0 0
-    *   1 1 1 0 0 0
-    *   0 0 2 4 4 0
-    *   0 0 0 2 0 0
-    *   0 0 1 2 4 0
-    *
-    *  Time complexity O(n/2 * m/2) - Space complexity of O(1)
-    * */
+     *   1 1 1 0 0 0
+     *   0 1 0 0 0 0
+     *   1 1 1 0 0 0
+     *   0 0 2 4 4 0
+     *   0 0 0 2 0 0
+     *   0 0 1 2 4 0
+     *
+     *  Time complexity O(n/2 * m/2) - Space complexity of O(1)
+     * */
     static int hourglassSum(List<List<Integer>> arr) {
         int sum = Integer.MIN_VALUE;
 
@@ -144,7 +182,7 @@ public class Arrays {
     static void rotateMatrixConstantSpaceComplexity(int[][] matrix) {
         int n = matrix.length;
 
-        for (int row = 0; row < n/2; row++) {
+        for (int row = 0; row < n / 2; row++) {
             int last = n - 1 - row;
 
             for (int collumn = row; collumn < last; collumn++) {
@@ -172,7 +210,7 @@ public class Arrays {
 
         for (int row = 0; row < matrix.length; row++) {
             for (int col = 0; col < matrix.length; col++) {
-                rt[col][rt.length -1 - row] = matrix[row][col];
+                rt[col][rt.length - 1 - row] = matrix[row][col];
             }
         }
 
@@ -281,7 +319,7 @@ public class Arrays {
         System.out.print("\nThe string " + new String(str) + " urlfy is ");
 
         while (index >= 0) {
-            if (str[cur] ==  ' ') {
+            if (str[cur] == ' ') {
                 str[index--] = '0';
                 str[index--] = '2';
                 str[index--] = '%';
@@ -349,14 +387,14 @@ public class Arrays {
         char[] chars = str.toLowerCase().toCharArray();
 
         int[] hash = new int[27];
-        
+
         for (char letter : chars) {
             int key = (int) letter - 'a';
             if (hash[key] != 0)
                 return false;
             hash[key] = 1;
         }
-        
+
         return true;
     }
 }
