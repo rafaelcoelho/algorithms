@@ -76,11 +76,78 @@ public class Arrays {
         zeroMatrix(new int[][]{{1,0,3,4},{1,2,3,4},{5,6,7,0}});
         zeroMatrix(new int[][]{{1,2,3,4},{1,2,3,4},{5,6,7,8}});
         zeroMatrix(new int[][]{{1,2,3,4},{1,2,0,4},{5,6,7,8}});
+        zeroMatrix(new int[][]{{1,2,3,0},{0,2,0,4},{5,6,7,8}});
 
         zeroMatrix_usingMarkupFlag(new int[][]{{1,0,3,4},{1,2,3,4},{5,6,7,0}});
         zeroMatrix_usingMarkupFlag(new int[][]{{1,2,3,4},{1,2,3,4},{5,6,7,8}});
         zeroMatrix_usingMarkupFlag(new int[][]{{1,2,3,4},{1,2,0,4},{5,6,7,8}});
+        zeroMatrix_usingMarkupFlag(new int[][]{{1,2,3,0},{0,2,0,4},{5,6,7,8}});
+
+        zeroMatrix_cacheInMatrix(new int[][]{{1,0,3,4},{1,2,3,4},{5,6,7,0}});
+        zeroMatrix_cacheInMatrix(new int[][]{{1,2,3,4},{1,2,3,4},{5,6,7,8}});
+        zeroMatrix_cacheInMatrix(new int[][]{{1,2,3,4},{1,2,0,4},{5,6,7,8}});
+        zeroMatrix_cacheInMatrix(new int[][]{{1,2,3,0},{0,2,0,4},{5,6,7,8}});
     }
+
+    public static void zeroMatrix_cacheInMatrix(int[][] matrix) {
+        System.out.println("zeroMatrix_cacheInMatrix - being");
+        printMatrix(matrix);
+        boolean firstRowZero = false;
+        boolean firstColZero = false;
+
+        for (int[] ints : matrix) {
+            if (ints[0] == 0) {
+                firstColZero = true;
+                break;
+            }
+        }
+
+        for (int i = 0; i < matrix[0].length; i++) {
+            if (matrix[0][i] == 0) {
+                firstRowZero = true;
+                break;
+            }
+        }
+
+        for (int i = 1; i < matrix.length; i++) {
+            for (int j = 1; j < matrix[i].length; j++) {
+                if (matrix[i][j] == 0) {
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                    break;
+                }
+            }
+        }
+
+        for (int i = 0; i < matrix.length; i++) {
+            if (matrix[i][0] == 0) {
+                aux_zeroRow(matrix, i);
+            }
+        }
+
+        for (int i = 0; i < matrix[0].length; i++) {
+            if (matrix[0][i] == 0) {
+                aux_zeroCol(matrix, i);
+            }
+        }
+
+        if (firstRowZero) aux_zeroRow(matrix, 0);
+        if (firstColZero) aux_zeroCol(matrix, 0);
+
+        printMatrix(matrix);
+        System.out.println("zeroMatrix_cacheInMatrix - end");
+    }
+
+    private static void aux_zeroRow(int[][] matrix, int row) {
+        java.util.Arrays.fill(matrix[row], 0);
+    }
+
+    private static void aux_zeroCol(int[][] matrix, int column) {
+        for (int i = 0; i < matrix.length; i++) {
+            matrix[i][column] = 0;
+        }
+    }
+
 
     //O(nm) for time complexity
     //O(n of zeros) for space complexity
@@ -103,7 +170,6 @@ public class Arrays {
             for (int j = 0; j < matrix[i].length; j++) {
                 if (matrix[i][j] == 0) {
                     zeros.add(new Node(i, j));
-                    break;
                 }
             }
         }
@@ -117,10 +183,9 @@ public class Arrays {
         printMatrix(matrix);
 
         for (int row = 0; row < matrix.length; row++) {
-            for (int column = 0; column < matrix.length; column++) {
+            for (int column = 0; column < matrix[row].length; column++) {
                 if (matrix[row][column] == 0) {
                     aux_zeroMatrixAxis(matrix, row, column, Integer.MIN_VALUE);
-                    break;
                 }
             }
         }
@@ -138,10 +203,14 @@ public class Arrays {
 
     public static void aux_zeroMatrixAxis(int[][] matrix, int row, int column, int value) {
         for (int i = 0; i < matrix.length; i++) {
+            if (matrix[i][column] == 0 && value == Integer.MIN_VALUE) continue;
             matrix[i][column] = value;
         }
 
-        java.util.Arrays.fill(matrix[row], value);
+        for (int i = 0; i < matrix[0].length; i++) {
+            if (matrix[row][i] == 0 && value == Integer.MIN_VALUE) continue;
+            matrix[row][i] = value;
+        }
     }
 
     //4 2
