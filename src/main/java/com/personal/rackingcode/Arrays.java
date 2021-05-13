@@ -87,6 +87,31 @@ public class Arrays {
         zeroMatrix_cacheInMatrix(new int[][]{{1,2,3,4},{1,2,3,4},{5,6,7,8}});
         zeroMatrix_cacheInMatrix(new int[][]{{1,2,3,4},{1,2,0,4},{5,6,7,8}});
         zeroMatrix_cacheInMatrix(new int[][]{{1,2,3,0},{0,2,0,4},{5,6,7,8}});
+
+        System.out.println("stringRotation() = " + stringRotation("waterbottle", "erbottlewat"));
+        System.out.println("stringRotation() = " + stringRotation("rafael", "faelra"));
+        System.out.println("stringRotation() = " + stringRotation("rarael", "raelra"));
+        System.out.println("stringRotation() = " + stringRotation("rarara", "rarare"));
+    }
+
+    //O(2n) of time complexity
+    //O(n) of space complexity
+    static boolean stringRotation(String base, String rotate) {
+
+        if (base.length() != rotate.length()) return false;
+
+        String concat = rotate + rotate;
+
+        int j = 0;
+        for (int i = 0; i < concat.length() && j < base.length(); i++) {
+            if (base.charAt(j) == concat.charAt(i)) {
+                j++;
+            } else if (j > 0) {
+                j = 0;
+            }
+        }
+
+        return j == base.length();
     }
 
     public static void zeroMatrix_cacheInMatrix(int[][] matrix) {
@@ -147,7 +172,6 @@ public class Arrays {
             matrix[i][column] = 0;
         }
     }
-
 
     //O(nm) for time complexity
     //O(n of zeros) for space complexity
