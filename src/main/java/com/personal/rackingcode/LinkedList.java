@@ -35,6 +35,16 @@ public class LinkedList {
         weavingElements(weaveList);
     }
     
+    static <T> void printLinkedList(Node<T> head) {
+        if (head == null) {
+            System.out.println("");
+            return;
+        }
+
+        System.out.print(head.value + " -> ");
+        printLinkedList(head.next);
+    }
+    
     static <T> void weavingElements(Node<T> head) {
         Node<T> p1 = head;
         Node<T> p2 = head;
