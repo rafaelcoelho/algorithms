@@ -20,6 +20,52 @@ public class LinkedList {
         printKthElementList_recursive(head, pos);
         printKthElementList_iteratively(head, pos);
         printKthElementList_iteratively_v2(head, pos);
+
+        Node<String> weaveList = new Node<>("a1");
+        weaveList.next("a2")
+            .next("a3")
+            .next("a4")
+            .next("a5")
+            .next("b1")
+            .next("b2")
+            .next("b3")
+            .next("b4")
+            .next("b5");
+
+        weavingElements(weaveList);
+    }
+    
+    static <T> void weavingElements(Node<T> head) {
+        Node<T> p1 = head;
+        Node<T> p2 = head;
+
+        System.out.print("Before weave elements: ");
+        printLinkedList(head);
+
+        while (p2 != null && p2.next != null && p2.next.next != null) {
+            p1 = p1.next;
+            p2 = p2.next.next;
+        }
+
+        Node<T> reset = p1;
+        p2 = p1.next;
+        reset.next = null;
+
+        p1 = head;
+
+        while (p2 != null) {
+            Node<T> tmp_slow = p1.next;
+            Node<T> tmp_fast = p2.next;
+
+            p1.next = p2;
+            p2.next = tmp_slow;
+
+            p1 = tmp_slow;
+            p2 = tmp_fast;
+        }
+
+        System.out.print("After weave elements: ");
+        printLinkedList(head);
     }
 
     //O(n) time complexity
