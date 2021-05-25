@@ -45,33 +45,37 @@ public class LinkedList {
         printLinkedList(head.next);
     }
     
+    //O(n/2) of time complexity and O(1) of space complexity
     static <T> void weavingElements(Node<T> head) {
-        Node<T> p1 = head;
-        Node<T> p2 = head;
+        if (listSize(head) % 2 != 0) {
+            System.out.println("Not able to weave elements due to list is not even");
+            return;
+        }
+
+        Node<T> slowPointer = head;
+        Node<T> fastPointer = head;
 
         System.out.print("Before weave elements: ");
         printLinkedList(head);
 
-        while (p2 != null && p2.next != null && p2.next.next != null) {
-            p1 = p1.next;
-            p2 = p2.next.next;
+        while (fastPointer.next.next != null) {
+            slowPointer = slowPointer.next;
+            fastPointer = fastPointer.next.next;
         }
 
-        Node<T> reset = p1;
-        p2 = p1.next;
-        reset.next = null;
+        fastPointer = slowPointer.next;
+        slowPointer.next = null;
+        slowPointer = head;
 
-        p1 = head;
+        while (fastPointer != null) {
+            Node<T> tmp_slow = slowPointer.next;
+            Node<T> tmp_fast = fastPointer.next;
 
-        while (p2 != null) {
-            Node<T> tmp_slow = p1.next;
-            Node<T> tmp_fast = p2.next;
+            slowPointer.next = fastPointer;
+            fastPointer.next = tmp_slow;
 
-            p1.next = p2;
-            p2.next = tmp_slow;
-
-            p1 = tmp_slow;
-            p2 = tmp_fast;
+            slowPointer = tmp_slow;
+            fastPointer = tmp_fast;
         }
 
         System.out.print("After weave elements: ");
