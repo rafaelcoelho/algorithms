@@ -45,6 +45,12 @@ public class LinkedList {
         printLinkedList(head.next);
     }
     
+    static int listSize(Node<?> head) {
+        if (head == null) return 0;
+
+        return listSize(head.next) + 1;
+    }
+
     //O(n/2) of time complexity and O(1) of space complexity
     static <T> void weavingElements(Node<T> head) {
         if (listSize(head) % 2 != 0) {
