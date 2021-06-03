@@ -3,6 +3,8 @@ package com.personal.leetcode.array;
 import java.util.Arrays;
 
 class Rotate {
+    //O(k*n) of time complexity
+    //O(1) of space complexity
     public void rotate(int[] nums, int k) {
         int k1 = (nums.length / k);
         
@@ -23,6 +25,8 @@ class Rotate {
         }
     }
 
+    //O(n) of time complexity
+    //O(n) of space complexity
     public void rotate2(int[] nums, int k) {
         int r = (k / nums.length) > 0 
                                     ? k - nums.length * (k / nums.length)
