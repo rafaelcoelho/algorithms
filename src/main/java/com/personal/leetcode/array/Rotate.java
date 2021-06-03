@@ -43,11 +43,17 @@ class Rotate {
         }
     }
 
-    public void rotate3(int[] nums, int k) {
+    //[1, 2, 3, 4, 5, 6, 7] - 3
+    //[5, 6, 7, 1, 2, 3, 4]
+    //O(n) of time complexity
+    //O(n) of space complexity
+    public void rotateUsingRemainder(int[] nums, int k) {
         int[] a = new int[nums.length];
+
         for (int i = 0; i < nums.length; i++) {
             a[(i + k) % nums.length] = nums[i];
         }
+
         for (int i = 0; i < nums.length; i++) {
             nums[i] = a[i];
         }
