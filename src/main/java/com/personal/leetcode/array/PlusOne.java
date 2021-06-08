@@ -11,6 +11,7 @@ class PlusOne {
             
             if (digits[i] > 9) {
                 flag = true;
+                digits[i] = 0;
             } else {
                 flag = false;
                 break;
@@ -20,21 +21,9 @@ class PlusOne {
         if (flag)
             result = new int[digits.length + 1];
         else
-            result = new int[digits.length];
+            return digits;
 
-        for (int i = digits.length - 1, j = result.length - 1; i >= 0; i--, j--) {
-            result[j] = digits[i];
-        }
-
-        for (int i = result.length - 1; i >= 0; i--) {
-            if (result[i] > 9) {
-                result[i] = 0;
-                continue;
-            }
-
-            if (flag) result[i] += 1;
-            break;
-        }
+        result[0] += 1;
 
         return result;
     }
