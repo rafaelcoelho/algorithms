@@ -37,6 +37,7 @@ public class Path {
         n2.relation.add(n4);
         n2.relation.add(n3);
         n2.relation.add(n1);
+        n2.relation.add(n8);
 
         n3.relation.add(n2);
         n3.relation.add(n1);
@@ -51,9 +52,9 @@ public class Path {
         n6.relation.add(n7);
         n7.relation.add(n8);
 
-        String value = "5";
+        String value = "8";
 
-        var head = n3;
+        var head = n1;
         System.out.println("BFS - Value + " + value + " found = " + findNode_bfs(SerializationUtils.clone(head), n -> n.value.equals(value)));
         System.out.println("DFS - Value + " + value + " found = " + findNode_dfs(head, value));
     }
@@ -62,6 +63,8 @@ public class Path {
         if (from == null) return false;
 
         boolean result = false;
+
+        System.out.println("DFS - Visiting: " + from.value);
         if (from.value.equals(value)) return true;
 
         from.visited = true;
@@ -88,7 +91,7 @@ public class Path {
             var cur = nodes.removeFirst();
             cur.visited = true;
 
-            System.out.println("Visiting: " + cur.value);
+            System.out.println("BFS - Visiting: " + cur.value);
             if (visitor.test(cur)) return true;
 
             for (Node<String> relative : cur.relation) {
