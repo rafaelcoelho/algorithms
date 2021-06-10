@@ -35,8 +35,27 @@ public class Path {
 
         n5.relation.add(n4);
 
-        String value = "5";
-        System.out.println("Value + " + value + " found = " + findNode_bfs(n1, value));
+        String value = "4";
+        // System.out.println("BFS - Value + " + value + " found = " + findNode_bfs(n1, value));
+        System.out.println("DFS - Value + " + value + " found = " + findNode_dfs(n1, value));
+    }
+
+    public static boolean findNode_dfs(Node<String> from, String value) {
+        if (from == null) return false;
+
+        boolean result = false;
+        if (from.value.equals(value)) return true;
+
+        from.visited = true;
+
+        for (Node<String> relative : from.relation) {
+            if (!relative.visited) {
+                result = findNode_dfs(relative, value);
+                if (result) break;
+            }
+        }
+
+        return result | false;
     }
 
     public static boolean findNode_bfs(Node<String> from, String value) {
