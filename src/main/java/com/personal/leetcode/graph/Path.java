@@ -1,12 +1,16 @@
 package com.personal.leetcode.graph;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Predicate;
+
+import org.apache.commons.lang3.SerializationUtils;
 
 public class Path {
 
-    static class Node <T> {
+    static class Node <T> implements Serializable {
         public T value;
         public List<Node<T>> relation;
         public boolean visited;
@@ -37,6 +41,7 @@ public class Path {
 
         String value = "4";
         var head = n2;
+        System.out.println("BFS - Value + " + value + " found = " + findNode_bfs(SerializationUtils.clone(head), n -> n.value.equals(value)));
         System.out.println("DFS - Value + " + value + " found = " + findNode_dfs(head, value));
     }
 
