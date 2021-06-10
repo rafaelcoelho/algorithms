@@ -33,14 +33,19 @@ public class Path {
 
         n2.relation.add(n4);
         n2.relation.add(n3);
+        n2.relation.add(n1);
+
+        n3.relation.add(n2);
+        n3.relation.add(n1);
 
         n4.relation.add(n3);
         n4.relation.add(n5);
+        n4.relation.add(n2);
 
         n5.relation.add(n4);
 
-        String value = "4";
-        var head = n2;
+        String value = "5";
+        var head = n3;
         System.out.println("BFS - Value + " + value + " found = " + findNode_bfs(SerializationUtils.clone(head), n -> n.value.equals(value)));
         System.out.println("DFS - Value + " + value + " found = " + findNode_dfs(head, value));
     }
