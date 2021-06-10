@@ -36,8 +36,8 @@ public class Path {
         n5.relation.add(n4);
 
         String value = "4";
-        // System.out.println("BFS - Value + " + value + " found = " + findNode_bfs(n1, value));
-        System.out.println("DFS - Value + " + value + " found = " + findNode_dfs(n1, value));
+        var head = n2;
+        System.out.println("DFS - Value + " + value + " found = " + findNode_dfs(head, value));
     }
 
     public static boolean findNode_dfs(Node<String> from, String value) {
@@ -58,7 +58,7 @@ public class Path {
         return result | false;
     }
 
-    public static boolean findNode_bfs(Node<String> from, String value) {
+    public static boolean findNode_bfs(Node<String> from, Predicate<Node<String>> visitor) {
         LinkedList<Node<String>> nodes = new LinkedList<Node<String>>();
 
         if (from == null) return false;
@@ -71,7 +71,7 @@ public class Path {
             cur.visited = true;
 
             System.out.println("Visiting: " + cur.value);
-            if (cur.value.equals(value)) return true;
+            if (visitor.test(cur)) return true;
 
             for (Node<String> relative : cur.relation) {
                 if (!relative.visited) {
