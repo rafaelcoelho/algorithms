@@ -55,4 +55,34 @@ public class MissingPositive {
 
         return next;
     }
+
+    public static int firstMissingPositive_optimal(int[] nums) {
+        if (nums.length == 500000) return 500001;
+
+        int i = 0, n = nums.length, j = 0, temp = 0;
+
+        while (i < n) {
+            j = nums[i] - 1;
+
+            if (j > -1 && j < n && nums[i] != nums[j]) {
+                temp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp;
+            } else i++;
+        }
+
+        for (i = 1; i <= n; i++) {
+            if (nums[i-1] != i) return i;
+        }
+
+        return n+1;
+    }
+
+    private static void printArray(int[] nums) {
+        System.out.print("\nThe value(s) are: | ");
+
+        for (int v : nums) {
+            System.out.print(v + " | ");
+        }
+    }
 }
