@@ -2,19 +2,37 @@ package com.personal.leetcode.array;
 
 public class MissingPositive {
     public static void main(String[] args) {
-        // System.out.println("Missing value is: " + firstMissingPositive(new int[]{2147483647}));
-        // System.out.println("Missing value is: " + firstMissingPositive(new int[]{0,10,2,1}));
-        // System.out.println("Missing value is: " + firstMissingPositive(new int[]{20,19,18,-1,0,1,-0}));
+        System.out.println("Missing - basic - expected 1 -> value is: " + firstMissingPositive(new int[]{2147483647}));
+        System.out.println("Missing - basic - expected 3 -> value is: " + firstMissingPositive(new int[]{0,10,2,1}));
+        System.out.println("Missing - basic - expected 2 -> value is: " + firstMissingPositive(new int[]{20,19,18,-1,0,1,-0}));
+        System.out.println("Missing - basic - expected 3 -> value is: " + firstMissingPositive(new int[]{0,0,0,0,0,-1,1,1,5,6,2}));
+        System.out.println("Missing - basic - expected 2 -> value is: " + firstMissingPositive(new int[]{1}));
+        System.out.println("Missing - basic - expected 1 -> value is: " + firstMissingPositive(new int[]{7,8,9,11,12}));
+        System.out.println("Missing - basic - expected 1 -> value is: " + firstMissingPositive(new int[]{100,-1}));
+        System.out.println("Missing - basic - expected 3 -> value is: " + firstMissingPositive(new int[]{1,2,0}));
+        System.out.println("Missing - basic - expected 2 -> value is: " + firstMissingPositive(new int[]{-10,-3,-100,-1000,-239,1}));
 
-        System.out.println("Missing - sorting 1 -> value is: " + firstMissingPositive_sorting(new int[]{2147483647}));
-        System.out.println("Missing - sorting 3 -> value is: " + firstMissingPositive_sorting(new int[]{0,10,2,1}));
-        System.out.println("Missing - sorting 2 -> value is: " + firstMissingPositive_sorting(new int[]{20,19,18,-1,0,1,-0}));
-        System.out.println("Missing - sorting 3 -> value is: " + firstMissingPositive_sorting(new int[]{0,0,0,0,0,-1,1,1,5,6,2}));
-        System.out.println("Missing - sorting 2 -> value is: " + firstMissingPositive_sorting(new int[]{1}));
-        System.out.println("Missing - sorting 1 -> value is: " + firstMissingPositive_sorting(new int[]{7,8,9,11,12}));
-        System.out.println("Missing - sorting 1 -> value is: " + firstMissingPositive_sorting(new int[]{100,-1}));
-        System.out.println("Missing - sorting 3 -> value is: " + firstMissingPositive_sorting(new int[]{1,2,0}));
-        System.out.println("Missing - sorting 2 -> value is: " + firstMissingPositive_sorting(new int[]{-10,-3,-100,-1000,-239,1}));
+        System.out.println("");
+        System.out.println("Missing - sorting - expected 1 -> value is: " + firstMissingPositive_sorting(new int[]{2147483647}));
+        System.out.println("Missing - sorting - expected 3 -> value is: " + firstMissingPositive_sorting(new int[]{0,10,2,1}));
+        System.out.println("Missing - sorting - expected 2 -> value is: " + firstMissingPositive_sorting(new int[]{20,19,18,-1,0,1,-0}));
+        System.out.println("Missing - sorting - expected 3 -> value is: " + firstMissingPositive_sorting(new int[]{0,0,0,0,0,-1,1,1,5,6,2}));
+        System.out.println("Missing - sorting - expected 2 -> value is: " + firstMissingPositive_sorting(new int[]{1}));
+        System.out.println("Missing - sorting - expected 1 -> value is: " + firstMissingPositive_sorting(new int[]{7,8,9,11,12}));
+        System.out.println("Missing - sorting - expected 1 -> value is: " + firstMissingPositive_sorting(new int[]{100,-1}));
+        System.out.println("Missing - sorting - expected 3 -> value is: " + firstMissingPositive_sorting(new int[]{1,2,0}));
+        System.out.println("Missing - sorting - expected 2 -> value is: " + firstMissingPositive_sorting(new int[]{-10,-3,-100,-1000,-239,1}));
+
+        System.out.println("");
+        System.out.println("Missing - optimal - expected 1 -> value is: " + firstMissingPositive_optimal(new int[]{2147483647}));
+        System.out.println("Missing - optimal - expected 3 -> value is: " + firstMissingPositive_optimal(new int[]{0,10,2,1}));
+        System.out.println("Missing - optimal - expected 2 -> value is: " + firstMissingPositive_optimal(new int[]{20,19,18,-1,0,1,-0}));
+        System.out.println("Missing - optimal - expected 3 -> value is: " + firstMissingPositive_optimal(new int[]{0,0,0,0,0,-1,1,1,5,6,2}));
+        System.out.println("Missing - optimal - expected 2 -> value is: " + firstMissingPositive_optimal(new int[]{1}));
+        System.out.println("Missing - optimal - expected 1 -> value is: " + firstMissingPositive_optimal(new int[]{7,8,9,11,12}));
+        System.out.println("Missing - optimal - expected 1 -> value is: " + firstMissingPositive_optimal(new int[]{100,-1}));
+        System.out.println("Missing - optimal - expected 3 -> value is: " + firstMissingPositive_optimal(new int[]{1,2,0}));
+        System.out.println("Missing - optimal - expected 2 -> value is: " + firstMissingPositive_optimal(new int[]{-10,-3,-100,-1000,-239,1}));
     }
 
     public static int firstMissingPositive(int[] nums) {
