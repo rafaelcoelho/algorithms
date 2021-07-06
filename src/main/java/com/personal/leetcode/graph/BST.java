@@ -60,6 +60,21 @@ public class BST {
 
         System.out.println("Breadth First Search");
         bfs(root, System.out::println);
+
+        System.out.println("Is BST: " + isBST(root));
+    }
+
+    //O(nodes) for time complexity and O(nodes) of space complexity
+    private static <T extends Number> boolean isBST(Node<T> root) {
+        ArrayList<T> values = new ArrayList<T>();
+
+        dfs(root, values::add);
+
+        for (int i = 1; i < values.size(); i++) {
+            if (values.get(i).intValue() <= values.get(i - 1).intValue()) return false;
+        }
+
+        return true;
     }
 
     private static <T> void bfs(Node<T> root, Consumer<T> consumer) {
