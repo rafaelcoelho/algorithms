@@ -51,18 +51,40 @@ public class BST {
             .left(12);
 
         rigth.rigth.rigth(25)
-            .left(20);
+            .left(17);
 
         root.rigth = rigth;
 
-        getArrayUsingDFS(root, System.out::println);
+        System.out.println("Deep First Search");
+        dfs(root, System.out::println);
+
+        System.out.println("Breadth First Search");
+        bfs(root, System.out::println);
     }
 
-    private static <T> void getArrayUsingDFS(Node<T> root, Consumer<T> consumer) {
+    private static <T> void bfs(Node<T> root, Consumer<T> consumer) {
+        Deque<Node<T>> nodes = new ArrayDeque<>();
+
+        nodes.add(root);
+
+        while(!nodes.isEmpty()) {
+            Node<T> pop = nodes.pop();
+
+            consumer.accept(pop.value);
+
+            if (pop.left != null)
+                nodes.add(pop.left);
+
+            if (pop.rigth != null)
+                nodes.add(pop.rigth);
+        }
+    }
+
+    private static <T> void dfs(Node<T> root, Consumer<T> consumer) {
         if (root == null) return;
 
-        getArrayUsingDFS(root.left, consumer);
+        dfs(root.left, consumer);
         consumer.accept(root.value);
-        getArrayUsingDFS(root.rigth, consumer);
+        dfs(root.rigth, consumer);
     }
 }
