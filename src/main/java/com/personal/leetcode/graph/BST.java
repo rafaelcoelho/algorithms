@@ -1,6 +1,12 @@
 package com.personal.leetcode.graph;
 
 import java.io.Serializable;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.List;
+import java.util.function.Consumer;
 
 public class BST {
     static class Node <T> implements Serializable {
@@ -49,5 +55,14 @@ public class BST {
 
         root.rigth = rigth;
 
+        getArrayUsingDFS(root, System.out::println);
+    }
+
+    private static <T> void getArrayUsingDFS(Node<T> root, Consumer<T> consumer) {
+        if (root == null) return;
+
+        getArrayUsingDFS(root.left, consumer);
+        consumer.accept(root.value);
+        getArrayUsingDFS(root.rigth, consumer);
     }
 }
