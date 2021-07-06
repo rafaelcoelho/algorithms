@@ -68,6 +68,8 @@ public class BST {
         System.out.println("Hard case - Is BST: " + isBST(new Node<>(10).rigth(10)));
     }
 
+    //O(number of nodes) of time complexity to traverse the tree and
+    //O(log n) of space complexity due to recursive algo that may go in till to the tree depth
     private static <T extends Number> boolean isBST(Node<T> root, T minValue, T maxValue) {
         if (root == null) return true;
 
