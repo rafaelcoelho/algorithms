@@ -62,6 +62,23 @@ public class BST {
         bfs(root, System.out::println);
 
         System.out.println("Is BST: " + isBST(root));
+        System.out.println("Is BST: " + isBST(root, null, null));
+
+        System.out.println("Hard case - Is BST: " + isBST(new Node<>(10).rigth(5), null, null));
+        System.out.println("Hard case - Is BST: " + isBST(new Node<>(10).rigth(10)));
+    }
+
+    private static <T extends Number> boolean isBST(Node<T> root, T minValue, T maxValue) {
+        if (root == null) return true;
+
+        if ((minValue != null && root.value.intValue() <= minValue.intValue()) ||
+            (maxValue != null && root.value.intValue() >= maxValue.intValue()))
+            return false;
+
+        if (!isBST(root.left, minValue, root.value) || !isBST(root.rigth, root.value, maxValue))
+            return false;
+
+        return true;
     }
 
     //O(nodes) for time complexity and O(nodes) of space complexity
