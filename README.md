@@ -5,3 +5,4 @@ new algorithms for common problems as well as leverage the code skill set as per
 ## Topic leve 2
 
 ### Goals
+Some description around the goals.
