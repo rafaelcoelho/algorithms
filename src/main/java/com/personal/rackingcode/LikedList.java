@@ -1,88 +1,88 @@
 package com.personal.rackingcode;
 
-import java.util.*;
+import java.util.HashSet;
 
 public class LikedList {
-	
-    public static void main (String[] args) {
-        Node head = new Node(5);
-        
-        head.next(new Node(5))
-            .next(new Node(3))
-            .next(new Node(4))
-            .next(new Node(3))
-            .next(new Node(6))
-            .next(new Node(6))
-            .next(new Node(6))
-            .next(new Node(6))
-            .next(new Node(6))
-            .next(new Node(6))
-            .next(new Node(10));
+
+    public static void main(String[] args) {
+        NodeList head = new NodeList(5);
+
+        head.next(new NodeList(5))
+                .next(new NodeList(3))
+                .next(new NodeList(4))
+                .next(new NodeList(3))
+                .next(new NodeList(6))
+                .next(new NodeList(6))
+                .next(new NodeList(6))
+                .next(new NodeList(6))
+                .next(new NodeList(6))
+                .next(new NodeList(6))
+                .next(new NodeList(10));
 
         printList(head);
         removeDuplicated(head);
-        printList(head); 
-        
-        Node head2 = new Node(5);
-        
-        head2.next(new Node(5))
-            .next(new Node(3))
-            .next(new Node(4))
-            .next(new Node(3))
-            .next(new Node(6))
-            .next(new Node(6))
-            .next(new Node(6))
-            .next(new Node(6))
-            .next(new Node(6))
-            .next(new Node(6))
-            .next(new Node(10));
+        printList(head);
+
+        NodeList head2 = new NodeList(5);
+
+        head2.next(new NodeList(5))
+                .next(new NodeList(3))
+                .next(new NodeList(4))
+                .next(new NodeList(3))
+                .next(new NodeList(6))
+                .next(new NodeList(6))
+                .next(new NodeList(6))
+                .next(new NodeList(6))
+                .next(new NodeList(6))
+                .next(new NodeList(6))
+                .next(new NodeList(10));
         removeDuplicated2_hint9(head2);
         printList(head2);
 
-        Node head3 = new Node(5);
-        
-        head3.next(new Node(1))
-            .next(new Node(2))
-            .next(new Node(3))
-            .next(new Node(4))
-            .next(new Node(5))
-            .next(new Node(6))
-            .next(new Node(7))
-            .next(new Node(8))
-            .next(new Node(9))
-            .next(new Node(10))
-            .next(new Node(11));
+        NodeList head3 = new NodeList(5);
+
+        head3.next(new NodeList(1))
+                .next(new NodeList(2))
+                .next(new NodeList(3))
+                .next(new NodeList(4))
+                .next(new NodeList(5))
+                .next(new NodeList(6))
+                .next(new NodeList(7))
+                .next(new NodeList(8))
+                .next(new NodeList(9))
+                .next(new NodeList(10))
+                .next(new NodeList(11));
         printKthToLast(head3, 1);
         printKthToLast_2nd(head3, 1);
 
-        head3 = new Node(0);
-        
-        Node toRemove = new Node(225);
-        head3.next(new Node(1))
-            .next(new Node(2))
-            .next(new Node(3))
-            .next(new Node(4))
-            .next(toRemove)
-            .next(new Node(6))
-            .next(new Node(7))
-            .next(new Node(8))
-            .next(new Node(9))
-            .next(new Node(10))
-            .next(new Node(11))
-            ;
-        
+        head3 = new NodeList(0);
+
+        NodeList toRemove = new NodeList(225);
+        head3.next(new NodeList(1))
+                .next(new NodeList(2))
+                .next(new NodeList(3))
+                .next(new NodeList(4))
+                .next(toRemove)
+                .next(new NodeList(6))
+                .next(new NodeList(7))
+                .next(new NodeList(8))
+                .next(new NodeList(9))
+                .next(new NodeList(10))
+                .next(new NodeList(11))
+        ;
+
         printList(head3);
         removeNodeInMiddle(toRemove);
         printList(head3);
     }
 
     //Time complexit - O(1)
-    private static boolean removeNodeInMiddle(Node toRemove) {
+    private static boolean removeNodeInMiddle(NodeList toRemove) {
         if (toRemove == null || toRemove.getNext() == null) {
             return false;
         }
 
-        Node next = toRemove.getNext();
+        NodeList next = toRemove.getNext();
         toRemove.setValue(next.getValue());
         toRemove.next(next.getNext());
 
@@ -91,9 +91,9 @@ public class LikedList {
 
     //Time complexity  - O(n)
     //Space complexity - O(1)
-    private static void printKthToLast_2nd(Node head, int k) {
-        Node p1 = head;
-        Node p2 = head;
+    private static void printKthToLast_2nd(NodeList head, int k) {
+        NodeList p1 = head;
+        NodeList p2 = head;
 
         for (int i = 0; i < k; i++) {
             p1 = p1.getNext();
@@ -109,7 +109,7 @@ public class LikedList {
 
     //Time complexity  - O(n)
     //Space complexity - O(n)
-    private static int printKthToLast(Node head, int k) {
+    private static int printKthToLast(NodeList head, int k) {
         if (head == null)
             return 0;
 
@@ -121,12 +121,12 @@ public class LikedList {
         return index;
     }
 
-    private static void removeDuplicated(Node in) {
-        Node head = in;
+    private static void removeDuplicated(NodeList in) {
+        NodeList head = in;
 
         while (head.getNext() != null) {
 
-            Node current = head;
+            NodeList current = head;
 
             while (current.getNext() != null) {
                 if (head.getValue() == current.getNext().getValue()) {
@@ -140,15 +140,15 @@ public class LikedList {
         }
     }
 
-    private static void removeDuplicated2(Node in) {
-        Node head = in;
+    private static void removeDuplicated2(NodeList in) {
+        NodeList head = in;
 
         while (head.getNext() != null) {
 
-            Node current = head;
+            NodeList current = head;
 
             while (current.getNext() != null) {
-                
+
                 if (head.getValue() == current.getNext().getValue()) {
                     current.next(current.getNext().getNext());
                 } else {
@@ -160,14 +160,14 @@ public class LikedList {
         }
     }
 
-    private static void removeDuplicated2_hint40(Node in) {
-        
+    private static void removeDuplicated2_hint40(NodeList in) {
+
     }
 
-    private static void removeDuplicated2_hint9(Node in) {
+    private static void removeDuplicated2_hint9(NodeList in) {
         HashSet<Integer> set = new HashSet<>();
 
-        Node previous = in;
+        NodeList previous = in;
         for (; in != null; in = in.getNext()) {
             if (set.contains(in.getValue())) {
                 previous.next(in.getNext());
@@ -178,7 +178,7 @@ public class LikedList {
         }
     }
 
-    private static void printList(Node head) {
+    private static void printList(NodeList head) {
         System.out.println("The list is:");
 
         while (head != null) {
@@ -189,18 +189,18 @@ public class LikedList {
         System.out.println("");
     }
 
-    
+
 }
 
-class Node {
+class NodeList {
     private int value;
-    private Node next;
+    private NodeList next;
 
-    public Node(int value) {
+    public NodeList(int value) {
         this.value = value;
     }
 
-    public Node next(Node node) {
+    public NodeList next(NodeList node) {
         this.next = node;
         return node;
     }
@@ -213,7 +213,7 @@ class Node {
         return this.value;
     }
 
-    public Node getNext() {
+    public NodeList getNext() {
         return this.next;
     }
 
